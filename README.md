@@ -1,0 +1,2 @@
+# CloudCoinDesktopPortable
+CloudCoin Desktop Portable

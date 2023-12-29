@@ -15,6 +15,9 @@ ___
 
 This script only works with the windows version of CloudCoin Desktop.
 
+Download and install the latest version of the CloudCoin Desktop from here:  
+https://cloudcoinconsortium.com/use.html
+
 This script will attempt to find existing CloudCoin Desktop files, and copy them into this portable folder.  
 If copied, the original files will not be altered in any way.
 

@@ -2,7 +2,7 @@
 Release Notes: CloudCoin Desktop Portable
 =============
 
-1.1
+1.1.1
 - Will now update locations.txt to the current location
 
 1.0.1

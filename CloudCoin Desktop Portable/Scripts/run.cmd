@@ -82,6 +82,7 @@ IF EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\custom.cmd" (
     CD /D "%~dp0"
 )
 
+IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\" GOTO skip_location_file
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\locations.txt" GOTO create_location_file
 SET /P CLOUDCOINDESKTOPPORTABLE_locations_txt=< "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\locations.txt"
 IF "%CLOUDCOINDESKTOPPORTABLE_locations_txt%" == "+%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\Wallets" GOTO skip_location_file

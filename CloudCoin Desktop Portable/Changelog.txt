@@ -2,6 +2,9 @@
 Release Notes: CloudCoin Desktop Portable
 =============
 
+1.3
+- Will now allow multiple wallets as long as the first wallet is the current relative location
+
 1.2
 - Moved the Wallets folder to the main script folder
 

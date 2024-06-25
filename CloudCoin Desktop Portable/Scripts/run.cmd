@@ -87,8 +87,18 @@ IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Wallets\" MKDIR "%CLOUDCOINDES
 
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\" MKDIR "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%" || EXIT
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\locations.txt" GOTO create_location_file
-SET /P CLOUDCOINDESKTOPPORTABLE_locations_txt=< "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\locations.txt"
+CD /D "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%"
+SET CLOUDCOINDESKTOPPORTABLE_locations_txt=
+FOR /f "delims=" %%a IN ('TYPE locations.txt') DO (
+    SET CLOUDCOINDESKTOPPORTABLE_locations_txt=%%a
+    GOTO test_location_file
+)
+:test_location_file
+CD /D "%~dp0"
 IF "%CLOUDCOINDESKTOPPORTABLE_locations_txt%" == "+%CLOUDCOINDESKTOPPORTABLE_home_dir%\Wallets" GOTO skip_location_file
+IF "%CLOUDCOINDESKTOPPORTABLE_locations_txt%" == "-%CLOUDCOINDESKTOPPORTABLE_home_dir%\Wallets" GOTO skip_location_file
+IF "%CLOUDCOINDESKTOPPORTABLE_locations_txt%" == "+%CLOUDCOINDESKTOPPORTABLE_home_dir%\Wallets " GOTO skip_location_file
+IF "%CLOUDCOINDESKTOPPORTABLE_locations_txt%" == "-%CLOUDCOINDESKTOPPORTABLE_home_dir%\Wallets " GOTO skip_location_file
 :create_location_file
 ECHO +%CLOUDCOINDESKTOPPORTABLE_home_dir%\Wallets> "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\locations.txt" || EXIT
 :skip_location_file

@@ -9,7 +9,7 @@ CloudCoin Desktop Portable uses a command line argument that is built into Cloud
 This allows you to store your coins and run the manager from a single location, such as a USB flash drive.  
 You can then copy the "CloudCoin Desktop Portable" folder to multiple safe locations or flash drives to make backup copies of all of your coins.
 
-Do not to run this from more than one copy, or you will make changes to one copy that are not made in the original copy.  
+Do not run this from more than one copy, or you will make changes to one copy that are not made in the original copy.  
 You can make backup copies of the portable folder, but don't use a backup copy to run the manager unless you lose the original portable folder.
 ___
 

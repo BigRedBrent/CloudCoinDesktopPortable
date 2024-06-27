@@ -2,6 +2,9 @@
 Release Notes: CloudCoin Desktop Portable
 =============
 
+1.3.1
+- Changed the optional Settings\custom.cmd to run just before the desktop app
+
 1.3
 - Will now allow multiple wallets as long as the first wallet is the current relative location
 

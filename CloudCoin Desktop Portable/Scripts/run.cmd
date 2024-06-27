@@ -75,13 +75,6 @@ CLS
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\" MKDIR "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%" || EXIT
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_local_appdata_settings_dir%\" MKDIR "%CLOUDCOINDESKTOPPORTABLE_local_appdata_settings_dir%" || EXIT
 
-SET APPDATA=%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\AppData\Roaming
-IF EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\custom.cmd" (
-    CD /D "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings"
-    CALL custom.cmd "1"
-    CD /D "%~dp0"
-)
-
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Wallets\" IF EXIST "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\Wallets\" MOVE /Y "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\Wallets" "%CLOUDCOINDESKTOPPORTABLE_home_dir%\" > NUL 2>&1 || EXIT
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Wallets\" MKDIR "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Wallets" || EXIT
 
@@ -103,7 +96,13 @@ IF "%CLOUDCOINDESKTOPPORTABLE_locations_txt%" == "-%CLOUDCOINDESKTOPPORTABLE_hom
 ECHO +%CLOUDCOINDESKTOPPORTABLE_home_dir%\Wallets> "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\locations.txt" || EXIT
 :skip_location_file
 
+SET APPDATA=%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\AppData\Roaming
 SET CLOUDCOINDESKTOPPORTABLE_scripts_dir=
 IF EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\custom_end.cmd" SET CLOUDCOINDESKTOPPORTABLE_scripts_dir=%CLOUDCOINDESKTOPPORTABLE_home_dir%\Scripts
+IF EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\custom.cmd" (
+    CD /D "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings"
+    CALL custom.cmd "1"
+    CD /D "%~dp0"
+)
 START "" wait.vbs "%CLOUDCOINDESKTOPPORTABLE_manager_dir%" "%CLOUDCOINDESKTOPPORTABLE_manager%" "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings" "%CLOUDCOINDESKTOPPORTABLE_scripts_dir%"
 EXIT

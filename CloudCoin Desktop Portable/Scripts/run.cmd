@@ -20,7 +20,7 @@ CALL error.cmd "CloudCoin Desktop not installed!"
 :manager_found
 IF "%CLOUDCOINDESKTOPPORTABLE_manager_dir:~-1%" == "\" SET CLOUDCOINDESKTOPPORTABLE_manager_dir=%CLOUDCOINDESKTOPPORTABLE_manager_dir:~0,-1%
 IF EXIST "%CLOUDCOINDESKTOPPORTABLE_local_manager_dir%\" GOTO no_copy_manager
-CALL copy.cmd "%CLOUDCOINDESKTOPPORTABLE_manager_dir%" "%CLOUDCOINDESKTOPPORTABLE_local_manager_dir%" "Copy CloudCoin Desktop to portable folder [Y/N]?" "Copying manager files..." "Verifying copied manager files..." "Failed to copy manager files!"
+CALL copy.cmd "%CLOUDCOINDESKTOPPORTABLE_manager_dir%" "%CLOUDCOINDESKTOPPORTABLE_local_manager_dir%" "Copy the CloudCoin Desktop app to this portable folder [Y/N]?" "Copying manager files..." "Verifying copied manager files..." "Failed to copy manager files!"
 IF %ERRORLEVEL% EQU 1 EXIT
 TITLE %CLOUDCOINDESKTOPPORTABLE_name% %CLOUDCOINDESKTOPPORTABLE_version%
 CLS
@@ -45,7 +45,7 @@ FOR /F %%G IN ('DIR /B /O:-D "%~nx1" "%~nx1.tmp"') DO (
 )
 :manager_update_found
 IF "%CLOUDCOINDESKTOPPORTABLE_new_manager_dir:~-1%" == "\" SET CLOUDCOINDESKTOPPORTABLE_new_manager_dir=%CLOUDCOINDESKTOPPORTABLE_new_manager_dir:~0,-1%
-CALL copy.cmd "%CLOUDCOINDESKTOPPORTABLE_new_manager_dir%" "%CLOUDCOINDESKTOPPORTABLE_local_manager_dir%" "Replace CloudCoin Desktop in portable folder with newer installed version [Y/N]?" "Copying manager files..." "Verifying copied manager files..." "Failed to copy manager files!"
+CALL copy.cmd "%CLOUDCOINDESKTOPPORTABLE_new_manager_dir%" "%CLOUDCOINDESKTOPPORTABLE_local_manager_dir%" "Replace the CloudCoin Desktop app in this portable folder with newer installed version [Y/N]?" "Copying manager files..." "Verifying copied manager files..." "Failed to copy manager files!"
 IF %ERRORLEVEL% EQU 1 EXIT
 TITLE %CLOUDCOINDESKTOPPORTABLE_name% %CLOUDCOINDESKTOPPORTABLE_version%
 CLS

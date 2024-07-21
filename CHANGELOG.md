@@ -2,6 +2,9 @@
 Release Notes: CloudCoin Desktop Portable
 =============
 
+1.4.1
+- Edited wording for the copy files prompt
+
 1.4
 - Disabled option to copy existing settings
 

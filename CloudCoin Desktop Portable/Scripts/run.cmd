@@ -55,6 +55,9 @@ SET CLOUDCOINDESKTOPPORTABLE_userprofile_settings_dir=%USERPROFILE%\cloudcoin_de
 SET CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir=%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\cloudcoin_desktop
 SET CLOUDCOINDESKTOPPORTABLE_appdata_settings_dir=%APPDATA%\%CLOUDCOINDESKTOPPORTABLE_client_name_ext%
 SET CLOUDCOINDESKTOPPORTABLE_local_appdata_settings_dir=%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\AppData\Roaming\%CLOUDCOINDESKTOPPORTABLE_client_name_ext%
+
+:: Disabled option to copy existing settings
+GOTO no_copy_settings
 IF EXIST "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\" GOTO copy_settings_exist
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_userprofile_settings_dir%\" GOTO no_copy_settings
 CALL copy.cmd "%CLOUDCOINDESKTOPPORTABLE_userprofile_settings_dir%" "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%" "Copy detected CloudCoin Desktop settings and coins to portable folder [Y/N]?" "Copying settings files..." "Verifying copied settings files..." "Failed to copy settings files!"
@@ -64,7 +67,6 @@ CLS
 IF %CLOUDCOINDESKTOPPORTABLE_copy_error% EQU 2 GOTO no_copy_settings
 IF %CLOUDCOINDESKTOPPORTABLE_copy_error% NEQ 0 EXIT
 :copy_settings_exist
-
 IF EXIST "%CLOUDCOINDESKTOPPORTABLE_local_appdata_settings_dir%\" GOTO no_copy_settings
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_appdata_settings_dir%\" GOTO no_copy_settings
 CALL copy.cmd "%CLOUDCOINDESKTOPPORTABLE_appdata_settings_dir%" "%CLOUDCOINDESKTOPPORTABLE_local_appdata_settings_dir%" "yes" "Copying settings files..." "Verifying copied settings files..." "Failed to copy settings files!"
@@ -72,6 +74,7 @@ IF %ERRORLEVEL% NEQ 0 EXIT
 TITLE %CLOUDCOINDESKTOPPORTABLE_name% %CLOUDCOINDESKTOPPORTABLE_version%
 CLS
 :no_copy_settings
+
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\" MKDIR "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%" || EXIT
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_local_appdata_settings_dir%\" MKDIR "%CLOUDCOINDESKTOPPORTABLE_local_appdata_settings_dir%" || EXIT
 

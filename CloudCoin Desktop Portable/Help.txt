@@ -18,13 +18,8 @@ This script only works with the windows version of CloudCoin Desktop.
 Download and install the latest version of the CloudCoin Desktop from here:  
 https://cloudcoinconsortium.com/use.html
 
-This script will attempt to find existing CloudCoin Desktop files, and copy them into this portable folder.  
-If copied, the original files will not be altered in any way.
-
-You may find the settings and coin files in the "Settings" folder.  
-To start with a new blank copy of settings, select no when prompted to copy existing settings.  
-To remove any existing settings files that have been copied, you will have to find and delete them yourself.  
-Existing settings files are located in a directory that looks like this: "C:\Users\USER\cloudcoin_desktop"
+This script will not copy existing CloudCoin Desktop settings or coin files.  
+The original files will not be altered in any way.
 
 To use the locally installed CloudCoin Desktop, select no when prompted to copy CloudCoin Desktop.  
 To copy CloudCoin Desktop to the portable folder after originally selecting not to,  

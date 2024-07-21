@@ -2,6 +2,9 @@
 Release Notes: CloudCoin Desktop Portable
 =============
 
+1.4
+- Disabled option to copy existing settings
+
 1.3.1
 - Changed the optional Settings\custom.cmd to run just before the desktop app
 

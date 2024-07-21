@@ -2,7 +2,7 @@
 Release Notes: CloudCoin Desktop Portable
 =============
 
-1.4.2
+1.4.3
 - Edited the Help.txt file
 
 1.4.1

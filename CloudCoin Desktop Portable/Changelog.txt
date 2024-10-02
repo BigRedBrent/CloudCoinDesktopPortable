@@ -2,6 +2,9 @@
 Release Notes: CloudCoin Desktop Portable
 =============
 
+1.5
+- Will force refresh of server addresses on startup
+
 1.4.3
 - Edited the Help.txt file
 

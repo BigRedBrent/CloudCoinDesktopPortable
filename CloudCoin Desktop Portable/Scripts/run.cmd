@@ -88,5 +88,7 @@ IF EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\custom.cmd" (
     CALL custom.cmd "1"
     CD /D "%~dp0"
 )
+
+DEL "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\._id6.guardians" > NUL 2>&1
 START "" wait.vbs "%CLOUDCOINDESKTOPPORTABLE_manager_dir%" "%CLOUDCOINDESKTOPPORTABLE_manager%" "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings" "%CLOUDCOINDESKTOPPORTABLE_scripts_dir%"
 EXIT

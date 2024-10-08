@@ -80,6 +80,8 @@ IF "%CLOUDCOINDESKTOPPORTABLE_locations_txt%" == "-%CLOUDCOINDESKTOPPORTABLE_hom
 ECHO +%CLOUDCOINDESKTOPPORTABLE_home_dir%\Wallets> "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\locations.txt" || EXIT
 :skip_location_file
 
+IF NOT DEFINED CLOUDCOINDESKTOPPORTABLE_no_guardian_refresh DEL "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\._id6.guardians" > NUL 2>&1
+
 SET APPDATA=%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\AppData\Roaming
 SET CLOUDCOINDESKTOPPORTABLE_scripts_dir=
 IF EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\custom_end.cmd" SET CLOUDCOINDESKTOPPORTABLE_scripts_dir=%CLOUDCOINDESKTOPPORTABLE_home_dir%\Scripts
@@ -89,6 +91,5 @@ IF EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\custom.cmd" (
     CD /D "%~dp0"
 )
 
-DEL "%CLOUDCOINDESKTOPPORTABLE_local_userprofile_settings_dir%\._id6.guardians" > NUL 2>&1
 START "" wait.vbs "%CLOUDCOINDESKTOPPORTABLE_manager_dir%" "%CLOUDCOINDESKTOPPORTABLE_manager%" "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings" "%CLOUDCOINDESKTOPPORTABLE_scripts_dir%"
 EXIT

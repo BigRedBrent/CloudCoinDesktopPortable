@@ -2,6 +2,9 @@
 Release Notes: CloudCoin Desktop Portable
 =============
 
+1.5.1
+- Force refresh of server addresses on startup a little sooner in the script
+
 1.5
 - Will force refresh of server addresses on startup
 

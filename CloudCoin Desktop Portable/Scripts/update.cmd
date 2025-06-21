@@ -3,13 +3,14 @@ CLS
 IF "%~1" == "2" GOTO update_install
 IF "%~1" == "3" GOTO update_finish
 IF NOT "%~1" == "1" EXIT
-TITLE %CLOUDCOINDESKTOPPORTABLE_name% %CLOUDCOINDESKTOPPORTABLE_new_version% - Update
 
+TITLE %CLOUDCOINDESKTOPPORTABLE_name% %CLOUDCOINDESKTOPPORTABLE_new_version% - Update
 ECHO. & ECHO Downloading update...
 WHERE powershell >NUL 2>&1 || GOTO update_failed
 MKDIR "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\update.tmp" > NUL 2>&1 || GOTO update_failed
+TITLE %CLOUDCOINDESKTOPPORTABLE_name% %CLOUDCOINDESKTOPPORTABLE_new_version% - Downloading Update
 powershell -Command "$ErrorActionPreference = 'Stop'; try { Invoke-WebRequest -Uri 'https://github.com/BigRedBrent/CloudCoinDesktopPortable/raw/main/CloudCoinDesktopPortable.zip' -TimeoutSec 10 -OutFile '%CLOUDCOINDESKTOPPORTABLE_home_dir%\\Settings\\update.tmp\\CloudCoinDesktopPortable.zip' } catch { exit 1 }" || GOTO update_failed
-
+TITLE %CLOUDCOINDESKTOPPORTABLE_name% %CLOUDCOINDESKTOPPORTABLE_new_version% - Update
 CLS
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\update.tmp\CloudCoinDesktopPortable.zip" GOTO update_failed
 

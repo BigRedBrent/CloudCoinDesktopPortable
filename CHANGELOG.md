@@ -2,7 +2,7 @@
 Release Notes: CloudCoin Desktop Portable
 =============
 
-1.6
+1.6.1
 - Updated to use a more reliable downloader for updates
 
 1.5.1

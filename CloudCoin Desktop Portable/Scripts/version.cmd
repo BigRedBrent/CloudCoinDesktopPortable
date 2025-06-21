@@ -16,7 +16,6 @@ CALL :version_done
 ECHO. & ECHO Checking for update...
 WHERE powershell >NUL 2>&1 || GOTO version_done
 powershell -Command "$ErrorActionPreference = 'Stop';" "try { Invoke-WebRequest -Uri 'https://github.com/BigRedBrent/CloudCoinDesktopPortable/raw/main/version.txt' -TimeoutSec 5 -OutFile '%CLOUDCOINDESKTOPPORTABLE_home_dir%\\Settings\\version.tmp' } catch { exit 1 }" || GOTO version_done
-
 CLS
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\version.tmp" GOTO version_done
 

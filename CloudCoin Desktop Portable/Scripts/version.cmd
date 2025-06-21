@@ -14,23 +14,9 @@ TITLE %CLOUDCOINDESKTOPPORTABLE_name% %CLOUDCOINDESKTOPPORTABLE_version% - Check
 SET CLOUDCOINDESKTOPPORTABLE_new_version=
 CALL :version_done
 ECHO. & ECHO Checking for update...
-FOR /F "tokens=*" %%G IN ('BITSADMIN /LIST 1^>NUL') DO CALL :version_remove_job "%%G"
-BITSADMIN /CANCEL "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" > NUL 2>&1
-PING github.com -n 1 -w 5000 > NUL 2>&1 || GOTO version_done
-BITSADMIN /CREATE /DOWNLOAD "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" > NUL 2>&1
-BITSADMIN /SETMAXDOWNLOADTIME "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" 20 > NUL 2>&1
-BITSADMIN /SETNOPROGRESSTIMEOUT "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" 5 > NUL 2>&1
-BITSADMIN /SETMINRETRYDELAY "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" 0 > NUL 2>&1
-BITSADMIN /SETNOTIFYCMDLINE "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" NULL NULL > NUL 2>&1
-BITSADMIN /TRANSFER "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" /DOWNLOAD /DYNAMIC "https://github.com/BigRedBrent/CloudCoinDesktopPortable/raw/main/version.txt" "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\version.tmp" > NUL 2>&1
-BITSADMIN /CANCEL "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" > NUL 2>&1
-FOR /F "tokens=*" %%G IN ('BITSADMIN /LIST 1^>NUL') DO CALL :version_remove_job "%%G"
-GOTO version_skip_remove_job
-:version_remove_job
-SET CLOUDCOINDESKTOPPORTABLE_version_guid=%~1
-ECHO %~1 | FIND "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" > NUL 2>&1 && BITSADMIN /CANCEL %CLOUDCOINDESKTOPPORTABLE_version_guid:~0,38% > NUL 2>&1
-EXIT /B
-:version_skip_remove_job
+WHERE powershell >NUL 2>&1 || GOTO version_done
+powershell -Command "$ErrorActionPreference = 'Stop';" "try { Invoke-WebRequest -Uri 'https://github.com/BigRedBrent/CloudCoinDesktopPortable/raw/main/version.txt' -TimeoutSec 5 -OutFile '%CLOUDCOINDESKTOPPORTABLE_home_dir%\\Settings\\version.tmp' } catch { exit 1 }" || GOTO version_done
+
 CLS
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\version.tmp" GOTO version_done
 

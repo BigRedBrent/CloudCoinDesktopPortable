@@ -6,26 +6,10 @@ IF NOT "%~1" == "1" EXIT
 TITLE %CLOUDCOINDESKTOPPORTABLE_name% %CLOUDCOINDESKTOPPORTABLE_new_version% - Update
 
 ECHO. & ECHO Downloading update...
-FOR /F "tokens=*" %%G IN ('BITSADMIN /LIST 1^>NUL') DO CALL :update_remove_job "%%G"
-BITSADMIN /CANCEL "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" > NUL 2>&1
-PING github.com -n 1 -w 5000 > NUL 2>&1 || GOTO update_failed
-BITSADMIN /CREATE /DOWNLOAD "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" > NUL 2>&1
-BITSADMIN /SETMAXDOWNLOADTIME "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" 20 > NUL 2>&1
-BITSADMIN /SETNOPROGRESSTIMEOUT "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" 5 > NUL 2>&1
-BITSADMIN /SETMINRETRYDELAY "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" 0 > NUL 2>&1
-BITSADMIN /SETNOTIFYCMDLINE "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" NULL NULL > NUL 2>&1
-TITLE %CLOUDCOINDESKTOPPORTABLE_name% %CLOUDCOINDESKTOPPORTABLE_new_version% - Downloading Update
+WHERE powershell >NUL 2>&1 || GOTO update_failed
 MKDIR "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\update.tmp" > NUL 2>&1 || GOTO update_failed
-BITSADMIN /TRANSFER "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" /DOWNLOAD /DYNAMIC "https://github.com/BigRedBrent/CloudCoinDesktopPortable/raw/main/CloudCoinDesktopPortable.zip" "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\update.tmp\CloudCoinDesktopPortable.zip"
-TITLE %CLOUDCOINDESKTOPPORTABLE_name% %CLOUDCOINDESKTOPPORTABLE_new_version% - Update
-BITSADMIN /CANCEL "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" > NUL 2>&1
-FOR /F "tokens=*" %%G IN ('BITSADMIN /LIST 1^>NUL') DO CALL :update_remove_job "%%G"
-GOTO update_skip_remove_job
-:update_remove_job
-SET CLOUDCOINDESKTOPPORTABLE_update_guid=%~1
-ECHO %~1 | FIND "%CLOUDCOINDESKTOPPORTABLE_name% Download Update" > NUL 2>&1 && BITSADMIN /CANCEL %CLOUDCOINDESKTOPPORTABLE_update_guid:~0,38% > NUL 2>&1
-EXIT /B
-:update_skip_remove_job
+powershell -Command "$ErrorActionPreference = 'Stop'; try { Invoke-WebRequest -Uri 'https://github.com/BigRedBrent/CloudCoinDesktopPortable/raw/main/CloudCoinDesktopPortable.zip' -TimeoutSec 10 -OutFile '%CLOUDCOINDESKTOPPORTABLE_home_dir%\\Settings\\update.tmp\\CloudCoinDesktopPortable.zip' } catch { exit 1 }" || GOTO update_failed
+
 CLS
 IF NOT EXIST "%CLOUDCOINDESKTOPPORTABLE_home_dir%\Settings\update.tmp\CloudCoinDesktopPortable.zip" GOTO update_failed
 
